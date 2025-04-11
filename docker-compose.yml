@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "8462:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  symfony:
+    build:
+      context: ./backend
+    container_name: symfony
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - mysql
+    working_dir: /app
+    command: >
+      bash -c "composer install &&
+               php bin/console doctrine:migrations:migrate --no-interaction &&
+               php -S 0.0.0.0:8000 -t public"
+
+volumes:
+  db_data:
