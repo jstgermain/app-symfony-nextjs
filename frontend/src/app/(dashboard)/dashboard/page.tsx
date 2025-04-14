@@ -2,55 +2,38 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 
 export default function DashboardPage() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch("http://localhost:8000/api/me", {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Cache-Control": "no-store",
-          },
-        });
-
-        if (!res.ok) {
-          window.location.href = "/login";
-        } else {
-          setLoading(false);
-        }
-      } catch (err) {
-        window.location.href = "/login";
-      }
-    };
-    checkAuth();
-  }, []);
-
-  const handleLogout = async () => {
-    await fetch("http://localhost:8000/logout", {
-      method: "GET",
-      credentials: "include",
-    });
-    window.location.href = "/login";
-  };
-
-  if (loading) return <p>Loading...</p>;
-
   return (
-    <Box p={4}>
-      <Typography variant="h4">Welcome to your Dashboard</Typography>
-      <Button variant="outlined" color="secondary" onClick={handleLogout}>
-        Logout
-      </Button>
+    <Box>
+      <Typography variant="h4" gutterBottom>
+        Welcome to the Dashboard
+      </Typography>
+
+      <Grid container spacing={3}>
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
+          <Paper elevation={3} sx={{ p: 2 }}>
+            <Typography variant="h6">Widget 1</Typography>
+            <Typography>Some dummy content goes here.</Typography>
+          </Paper>
+        </Grid>
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
+          <Paper elevation={3} sx={{ p: 2 }}>
+            <Typography variant="h6">Widget 2</Typography>
+            <Typography>Another dummy widget for layout testing.</Typography>
+          </Paper>
+        </Grid>
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
+          <Paper elevation={3} sx={{ p: 2 }}>
+            <Typography variant="h6">Widget 3</Typography>
+            <Typography>Just a placeholder block.</Typography>
+          </Paper>
+        </Grid>
+      </Grid>
     </Box>
   );
 }

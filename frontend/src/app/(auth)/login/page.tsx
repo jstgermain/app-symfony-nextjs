@@ -1,10 +1,17 @@
-// ✅ frontend/src/app/(auth)/login/page.tsx
+// frontend/src/app/(auth)/login/page.tsx
 
 "use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { TextField, Button, Box, Typography, Alert, Link } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Alert,
+  Link,
+} from "@mui/material";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -12,7 +19,8 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleLogin = async () => {
+  const handleLogin = async (event?: React.FormEvent) => {
+    if (event) event.preventDefault();
     setError("");
     try {
       const res = await fetch("http://localhost:8000/api/login", {
@@ -49,29 +57,31 @@ export default function LoginPage() {
           {error}
         </Alert>
       )}
-      <TextField
-        fullWidth
-        label="Email"
-        margin="normal"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <TextField
-        fullWidth
-        label="Password"
-        type="password"
-        margin="normal"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <Button
-        variant="contained"
-        color="primary"
-        fullWidth
-        onClick={handleLogin}
-      >
-        Sign In
-      </Button>
+      <form onSubmit={handleLogin}>
+        <TextField
+          fullWidth
+          label="Email"
+          margin="normal"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <TextField
+          fullWidth
+          label="Password"
+          type="password"
+          margin="normal"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          type="submit"
+        >
+          Sign In
+        </Button>
+      </form>
       <Box mt={2} textAlign="center">
         <Link href="/forgot-password" underline="hover">
           Forgot your password?

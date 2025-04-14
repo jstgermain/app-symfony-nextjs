@@ -1,11 +1,18 @@
-// src/app/layout.tsx
+// frontend/src/app/layout.tsx
 
-import '@/app/globals.css';
-import { ReactNode } from 'react';
-import StoreProvider from '@/store/StoreProvider';
 import EmotionProvider from './EmotionProvider';
+import StoreProvider from '@/store/StoreProvider';
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export const metadata = {
+  title: 'Your App',
+  description: 'A modern app using Next.js, MUI, and Emotion',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>
