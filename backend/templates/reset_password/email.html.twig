@@ -1,0 +1,4 @@
+<p>Hello,</p>
+<p>To reset your password, please click the link below:</p>
+<p><a href="{{ resetToken.url }}">Reset Password</a></p>
+<p>This link will expire in {{ resetToken.expiresAt|date('g:i A') }}.</p>

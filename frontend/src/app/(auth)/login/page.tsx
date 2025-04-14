@@ -1,10 +1,10 @@
-// frontend/src/app/(auth)/login/page.tsx
+// ✅ frontend/src/app/(auth)/login/page.tsx
 
 "use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { TextField, Button, Box, Typography, Alert } from "@mui/material";
+import { TextField, Button, Box, Typography, Alert, Link } from "@mui/material";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,14 +15,14 @@ export default function LoginPage() {
   const handleLogin = async () => {
     setError("");
     try {
-    const res = await fetch("http://localhost:8000/api/login", {
+      const res = await fetch("http://localhost:8000/api/login", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
         credentials: "include",
-        });
+      });
 
       if (res.ok) {
         router.push("/dashboard");
@@ -72,6 +72,11 @@ export default function LoginPage() {
       >
         Sign In
       </Button>
+      <Box mt={2} textAlign="center">
+        <Link href="/forgot-password" underline="hover">
+          Forgot your password?
+        </Link>
+      </Box>
     </Box>
   );
 }

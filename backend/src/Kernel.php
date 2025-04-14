@@ -1,4 +1,5 @@
 <?php
+// backend/src/Kernel.php
 
 namespace App;
 
