@@ -1,4 +1,5 @@
 <?php
+// backend/src/Controller/SecurityController.php
 
 namespace App\Controller;
 
@@ -39,5 +40,25 @@ class SecurityController extends AbstractController
         return new JsonResponse([
             'message' => 'This should be intercepted by your custom authenticator.'
         ], 400);
+    }
+
+    #[Route('/api/me', name: 'api_me', methods: ['GET'])]
+    public function me(): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(['error' => 'Unauthorized'], 401);
+        }
+
+        return new JsonResponse([
+            'id' => $user->getId(),
+            'email' => $user->getUserIdentifier(),
+        ]);
+    }
+
+    #[Route('/api/{any}', name: 'api_options_fallback', methods: ['OPTIONS'], requirements: ['any' => '.+'])]
+    public function optionsFallback(): Response
+    {
+        return new Response(null, 204);
     }
 }

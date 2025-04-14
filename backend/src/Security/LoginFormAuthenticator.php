@@ -1,4 +1,5 @@
 <?php
+// backend/src/Security/LoginFormAuthenticator.php
 
 namespace App\Security;
 
@@ -6,11 +7,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
-use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
@@ -26,15 +26,12 @@ class LoginFormAuthenticator extends AbstractAuthenticator
     public function authenticate(Request $request): Passport
     {
         $data = json_decode($request->getContent(), true);
-
         $email = $data['email'] ?? '';
         $password = $data['password'] ?? '';
 
-        return new SelfValidatingPassport(
-            new UserBadge($email, function ($userIdentifier) use ($password) {
-                // You'll validate the user + password in checkCredentials
-                return $this->userProvider->loadUserByIdentifier($userIdentifier);
-            })
+        return new Passport(
+            new UserBadge($email),
+            new PasswordCredentials($password)
         );
     }
 

@@ -1,4 +1,5 @@
 <?php
+// backend/src/Entity/User.php
 
 namespace App\Entity;
 

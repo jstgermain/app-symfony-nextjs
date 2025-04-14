@@ -1,12 +1,13 @@
+# backend/config/packages/nelmio_cors.yaml
+
 nelmio_cors:
     defaults:
         origin_regex: true
         allow_origin: ['http://localhost:*']
         allow_credentials: true
         allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE']
-        allow_headers: ['Content-Type', 'Authorization']
+        allow_headers: ['Content-Type', 'Authorization', 'Cache-Control']
         expose_headers: ['Link']
         max_age: 3600
-        hosts: []
     paths:
         '^/': ~

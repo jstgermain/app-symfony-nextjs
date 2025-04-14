@@ -1,3 +1,5 @@
+# backend/config/packages/security.yaml
+
 security:
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
@@ -20,7 +22,10 @@ security:
             provider: app_user_provider
             custom_authenticator: App\Security\LoginFormAuthenticator
             logout:
-                path: app_logout
+                path: /logout
+                invalidate_session: true
+                delete_cookies:
+                    REMEMBERME: ~
                 # where to redirect after logout
                 # target: app_any_route
 
@@ -30,7 +35,7 @@ security:
                 path: /
                 always_remember_me: true
             
-            stateless: true
+            stateless: false
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -47,6 +52,7 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api, roles: ROLE_USER }
+        - { path: ^/api/me, roles: PUBLIC_ACCESS, methods: [OPTIONS] }
 
 when@test:
     security:
