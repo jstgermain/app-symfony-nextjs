@@ -1,8 +1,6 @@
 // frontend/src/app/(dashboard)/layout.tsx
 
 import type { Metadata } from "next";
-import EmotionProvider from "../EmotionProvider"; // adjust path if needed
-import StoreProvider from "@/store/StoreProvider";
 import DashboardLayoutClient from "@/app/(dashboard)/DashboardLayoutClient";
 
 export const metadata: Metadata = {
@@ -15,15 +13,5 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body>
-        <EmotionProvider>
-          <StoreProvider>
-            <DashboardLayoutClient>{children}</DashboardLayoutClient>
-          </StoreProvider>
-        </EmotionProvider>
-      </body>
-    </html>
-  );
+  return <DashboardLayoutClient>{children}</DashboardLayoutClient>;
 }

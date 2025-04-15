@@ -15,12 +15,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <MainAppBar />
-      <main style={{ paddingTop: 64 }}>
-        {/* account for AppBar height */}
-        {children}
-      </main>
-    </>
+    <html lang="en">
+      <body>
+        <EmotionProvider>
+          <StoreProvider>{children}</StoreProvider>
+        </EmotionProvider>
+      </body>
+    </html>
   );
 }

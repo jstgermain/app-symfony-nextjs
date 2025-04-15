@@ -16,18 +16,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <EmotionProvider>
-          <StoreProvider>
-            <StrippedAppBar />
-            <main style={{ paddingTop: 64 }}>
-              {/* account for StrippedAppBar height */}
-              {children}
-            </main>
-          </StoreProvider>
-        </EmotionProvider>
-      </body>
-    </html>
+    <>
+      <StrippedAppBar />
+      <main style={{ paddingTop: 64 }}>{children}</main>
+    </>
   );
 }
