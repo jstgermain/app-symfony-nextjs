@@ -45,15 +45,18 @@ export default function Hero() {
           maxWidth: "800px",
           px: 4,
           py: 6,
+          backgroundColor: "rgba(0, 0, 0, 0.4)",
+          borderRadius: 2,
           color: "#fff",
           textShadow: "0 1px 6px rgba(0,0,0,0.5)",
         }}
       >
-        <Typography variant="h2" sx={{ fontWeight: "bold", mb: 2 }}>
+        <Typography variant="h2" sx={{ fontWeight: "bold", mb: 2, color: 'inherit' }}>
           Tyro: Legend of Whisperwood
         </Typography>
-        <Typography variant="h6" sx={{ mb: 4 }}>
-          A consequence-based metroidvania where madness lurks beneath every choice.
+        <Typography variant="h6" sx={{ mb: 4, color: 'inherit' }}>
+          A consequence-based metroidvania where madness lurks beneath every
+          choice.
         </Typography>
         <Stack
           direction={{ xs: "column", sm: "row" }}
