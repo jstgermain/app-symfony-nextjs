@@ -1,4 +1,4 @@
-// frontend/src/components/organisms/TopAppBar.tsx
+// frontend/src/components/organisms/MainAppBar.tsx
 
 "use client";
 
@@ -18,7 +18,7 @@ import { NAV_ITEMS } from "@/constants/navigation";
 import { useMobileDrawer } from "@/hooks/useMobileDrawer";
 import MobileDrawer from "@/components/organisms/MobileDrawer";
 
-export default function TopAppBar() {
+export default function MainAppBar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { open, toggle, close } = useMobileDrawer();

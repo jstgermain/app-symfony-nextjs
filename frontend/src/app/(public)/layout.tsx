@@ -1,7 +1,7 @@
-// frontend/src/app/layout.tsx
+// frontend/src/app/(public)/layout.tsx
 
-import TopAppBar from '@/components/organisms/TopAppBar';
-import EmotionProvider from './EmotionProvider';
+import MainAppBar from '@/components/organisms/MainAppBar';
+import EmotionProvider from '@/app/EmotionProvider';
 import StoreProvider from '@/store/StoreProvider';
 
 export const metadata = {
@@ -19,7 +19,7 @@ export default function RootLayout({
       <body>
         <EmotionProvider>
           <StoreProvider>
-            <TopAppBar />
+            <MainAppBar />
             <main style={{ paddingTop: 64 }}>{/* account for AppBar height */}
               {children}
             </main></StoreProvider>

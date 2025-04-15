@@ -1,4 +1,4 @@
-// frontend/src/app/(dashboard)/dashboard/layout.tsx
+// frontend/src/app/(dashboard)/DashboardLayoutClient.tsx
 
 "use client";
 
@@ -10,13 +10,12 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-
 import DashboardAppBar from "@/components/organisms/DashboardAppBar";
 import Sidebar from "@/components/organisms/Sidebar";
 
 const drawerWidth = 240;
 
-export default function DashboardLayout({
+export default function DashboardLayoutClient({
   children,
 }: {
   children: React.ReactNode;
@@ -25,7 +24,7 @@ export default function DashboardLayout({
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
+  const handleDrawerToggle = () => setMobileOpen((prev) => !prev);
 
   return (
     <Box sx={{ display: "flex" }}>

@@ -28,7 +28,7 @@ export default function ProfileMenu() {
       method: "GET",
       credentials: "include",
     }).then(() => {
-      window.location.href = "/login";
+      window.location.href = "/";
     });
   };
 
