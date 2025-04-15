@@ -3,7 +3,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ThemeProvider, CssBaseline } from "@mui/material";
+import {
+  ThemeProvider,
+  CssBaseline,
+  CircularProgress,
+  Box,
+} from "@mui/material";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "@/lib/createEmotionCache";
 import theme from "@/theme";
@@ -21,7 +26,18 @@ export default function EmotionProvider({
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        minHeight="100vh"
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <CacheProvider value={clientSideEmotionCache}>
